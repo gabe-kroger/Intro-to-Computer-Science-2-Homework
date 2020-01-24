@@ -1,0 +1,66 @@
+#include<iostream>
+
+using namespace std;
+
+class Account
+{
+public:
+    //Member variable
+    double balance;
+
+    //Member method
+    virtual void deposit(double) = 0;
+    virtual void withdraw(double) = 0;
+    virtual double calcInterest() = 0;
+    virtual double currentBalance() = 0;
+};
+
+class Savings : public Account
+{
+public:
+    //Member Variables
+    int withdrawCount = 0;
+
+    //Member Methods
+    void deposit(double amount){this->balance += amount;}
+    void withdraw(double amount)
+   {
+       if(this->withdrawCount != 2){
+        this->balance -= amount;
+        withdrawCount++;
+        return;
+       }
+       cout << "Sorry, you've reached the withdraw limit" << endl;
+       return;
+   }
+    double calcInterest(){return this->balance *= .02;}
+    double currentBalance(){return this->balance;}
+
+
+
+};
+    class Checking : public Account
+    {
+public:
+    //Member Methods
+    void deposit(double amount){this->balance += amount;}
+    void withdraw(double amount){this->balance -= amount;}
+    double calcInterest(){return this->balance *= .02;}
+    double currentBalance(){return this->balance;}
+    };
+
+int main()
+{
+    Savings account1;
+    account1.deposit(1200.00);
+    account1.withdraw(1.0);
+    account1.withdraw(1.0);
+    cout << account1.currentBalance() << endl;
+    account1.calcInterest();
+    cout << account1.currentBalance() << endl;
+
+
+
+
+    return 0;
+}

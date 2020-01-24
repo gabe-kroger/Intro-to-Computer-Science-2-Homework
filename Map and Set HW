@@ -1,0 +1,61 @@
+#include <iostream>
+#include <iterator>
+#include <map>
+
+using namespace std;
+
+int main()
+{
+	char answer;
+	string name;
+	string phoneNumber;
+	map<string, string> phonebook;
+	map<string, string>::iterator contact;
+
+	do {
+		cout << "Phonebook options" << endl;
+		cout << "1 Add contact" << endl;
+		cout << "2 Find contact" << endl;
+		cout << "3 All contacts" << endl;
+		cout << "4 Remove contacts" << endl;
+		cout << "5 Quit" << endl;
+		cout << "Select Option: 1-5 " << endl;
+		cin >> answer;
+
+		switch (answer)
+		{
+		case '1':
+			cout << "\n\n\tEnter contact's name:"; cin >> name;
+			cout << "\tEnter contact's phone number: "; cin >> phoneNumber;
+			phonebook.insert({ name, phoneNumber });
+			cout << "\tContact added! ";
+			break;
+		case '2':
+			cout << "\n\n\tEnter contact's name: "; cin >> name;
+			cout << "\t\Contact number: " << phonebook.find(name)->second;
+			break;
+		case '3':
+			for (contact = phonebook.begin(); contact != phonebook.end(); contact++)
+			{
+				cout << endl << "\n\n\t\ " << contact->first;
+				cout << ": " << contact->second;
+			}
+			break;
+		case '4':
+			cout << "\n\n\tEnter contact's name: "; cin >> name;
+			contact = phonebook.find(name);
+			phonebook.erase(contact);
+			break;
+		case '5':
+			cout << "\n\n\tExiting phonebook ";
+			break;
+		default:cout << "\a";
+		}
+
+
+	} while (answer != '5');
+
+	return 0;
+}
+
+
